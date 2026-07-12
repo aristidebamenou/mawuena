@@ -1,0 +1,76 @@
+---
+import { TEMOIGNAGES } from '../data/temoignages.js';
+---
+
+<section id="temoignages" class="bg-wall">
+  <div class="mx-auto max-w-4xl px-5 py-20 text-center md:px-8 md:py-28">
+    <p class="reveal text-[11px] uppercase tracking-[0.35em] text-skin">Témoignages</p>
+    <h2 class="reveal font-brand mt-4 text-2xl text-olive md:text-4xl">Ce qu'ils en disent</h2>
+
+    <!-- Carrousel (avis fictifs de démonstration — cf. Points de vigilance) -->
+    <div class="reveal relative mt-12 overflow-hidden" id="testimonial-carousel">
+      <div class="testimonial-track flex">
+        {TEMOIGNAGES.map((t) => (
+          <blockquote class="w-full shrink-0 px-4">
+            <p class="font-display mx-auto max-w-xl text-lg italic leading-relaxed text-wood md:text-xl">
+              {t.citation}
+            </p>
+            <footer class="mt-6 text-[11px] uppercase tracking-[0.3em] text-skin">{t.auteur}</footer>
+          </blockquote>
+        ))}
+      </div>
+
+      <div class="mt-10 flex items-center justify-center gap-6">
+        <button
+          id="prev-testimonial"
+          class="border border-olive p-3 transition-colors hover:bg-olive hover:text-wall"
+          aria-label="Témoignage précédent"
+        >
+          <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M10 2 4 8l6 6" stroke="currentColor" stroke-width="1.5"></path></svg>
+        </button>
+        <div class="flex gap-2" id="testimonial-dots" aria-hidden="true"></div>
+        <button
+          id="next-testimonial"
+          class="border border-olive p-3 transition-colors hover:bg-olive hover:text-wall"
+          aria-label="Témoignage suivant"
+        >
+          <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M6 2l6 6-6 6" stroke="currentColor" stroke-width="1.5"></path></svg>
+        </button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<script>
+  /* Carrousel témoignages */
+  const track = document.querySelector('.testimonial-track');
+  const slides = track.children.length;
+  const dotsWrap = document.getElementById('testimonial-dots');
+  let index = 0;
+
+  for (let i = 0; i < slides; i++) {
+    const dot = document.createElement('span');
+    dot.className = 'h-1.5 w-1.5 rounded-full bg-olive transition-opacity';
+    dotsWrap.appendChild(dot);
+  }
+  const render = () => {
+    track.style.transform = `translateX(-${index * 100}%)`;
+    [...dotsWrap.children].forEach((d, i) => (d.style.opacity = i === index ? '1' : '0.3'));
+  };
+  document.getElementById('prev-testimonial').addEventListener('click', () => {
+    index = (index - 1 + slides) % slides;
+    render();
+  });
+  document.getElementById('next-testimonial').addEventListener('click', () => {
+    index = (index + 1) % slides;
+    render();
+  });
+  render();
+  // Défilement automatique doux (respecte prefers-reduced-motion)
+  if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+    setInterval(() => {
+      index = (index + 1) % slides;
+      render();
+    }, 8000);
+  }
+</script>

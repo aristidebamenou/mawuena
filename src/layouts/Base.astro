@@ -1,0 +1,44 @@
+---
+/* Layout commun : <head>, header et footer partagés par toutes les pages. */
+import '../styles/global.css';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import { SITE } from '../data/site.js';
+
+const { titre = SITE.titre, description = SITE.description } = Astro.props;
+---
+
+<!doctype html>
+<html lang="fr" class="scroll-smooth">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>{titre}</title>
+    <meta name="description" content={description} />
+    <meta property="og:title" content={titre} />
+    <meta property="og:description" content={description} />
+    <meta property="og:type" content="website" />
+    <meta property="og:locale" content="fr_FR" />
+
+    <!-- Typographies charte : Playfair Display (secondaire) & Montserrat (tertiaire) via Google Fonts.
+         La typo primaire "Gurmukhi MN" n'est pas disponible sur Google Fonts (police système Apple) :
+         fallback documenté vers Playfair Display / Georgia, cf. Points de vigilance. -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500&family=Playfair+Display:ital,wght@0,400;0,500;1,400;1,500&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+
+  <body class="bg-wall text-olive antialiased">
+    <Header />
+    <main>
+      <slot />
+    </main>
+    <Footer />
+
+    <!-- Apparition au scroll (progressive enhancement) -->
+    <script src="../scripts/reveal.js"></script>
+  </body>
+</html>

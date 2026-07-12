@@ -1,0 +1,11 @@
+# Dépendances & sorties de build
+node_modules/
+dist/
+.astro/
+
+# IDE
+.idea/
+
+# Divers
+.DS_Store
+npm-debug.log*

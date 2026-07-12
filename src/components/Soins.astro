@@ -1,0 +1,22 @@
+---
+import CarteSoin from './CarteSoin.astro';
+import { SOINS } from '../data/soins.js';
+---
+
+<section id="soins" class="bg-olive text-wall">
+  <div class="mx-auto max-w-6xl px-5 py-20 md:px-8 md:py-28">
+    <div class="mb-14 flex flex-col gap-4 md:flex-row md:items-end md:justify-between">
+      <div>
+        <p class="reveal text-[11px] uppercase tracking-[0.35em] text-linen">Les soins</p>
+        <h2 class="reveal font-brand mt-4 text-2xl md:text-4xl">Des rituels sur mesure</h2>
+      </div>
+      <p class="reveal max-w-sm text-sm leading-relaxed text-linen">
+        Chaque séance commence par un temps d'écoute, pour adapter le soin à votre corps et à votre moment de vie.
+      </p>
+    </div>
+
+    <div class="grid gap-8 md:grid-cols-3">
+      {SOINS.map((soin) => <CarteSoin soin={soin} />)}
+    </div>
+  </div>
+</section>

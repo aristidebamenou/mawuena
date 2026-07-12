@@ -1,0 +1,68 @@
+@import "tailwindcss";
+
+/* ============================================================
+   CHARTE MAWUENA — source unique de vérité
+   Palette primaire : OLIVE / WALL / LINEN
+   Palette secondaire (fonds & variantes) : GRASS / SKIN / WOOD
+   Les couleurs déclarées ici génèrent les utilitaires Tailwind
+   (bg-olive, text-wall, border-grass/40, …).
+   ============================================================ */
+@theme {
+  --color-olive: #403709;
+  --color-wall:  #f1ebe3;
+  --color-linen: #cbc2b6;
+  --color-grass: #89815A;
+  --color-skin:  #8E7755;
+  --color-wood:  #47372A;
+
+  /* Typo tertiaire (corps de texte) — appliquée au body par le preflight */
+  --font-sans: "Montserrat", ui-sans-serif, system-ui, sans-serif;
+  /* Typo secondaire (titrages secondaires & emphases, surtout en italique) */
+  --font-display: "Playfair Display", Georgia, serif;
+}
+
+/* Typo primaire (logo & gros titres) : Gurmukhi MN (police système Apple,
+   indisponible sur Google Fonts) — fallback documenté vers Playfair/Georgia. */
+@utility font-brand {
+  font-family: "Gurmukhi MN", "Playfair Display", Georgia, serif;
+  letter-spacing: 0.12em;
+}
+
+@layer base {
+  body {
+    font-weight: 300;
+  }
+
+  /* Accessibilité : focus visible cohérent avec la charte */
+  a:focus-visible,
+  button:focus-visible {
+    outline: 2px solid var(--color-grass);
+    outline-offset: 3px;
+  }
+}
+
+/* Animations d'apparition au scroll (progressive enhancement, cf. src/scripts/reveal.js) */
+.reveal {
+  opacity: 0;
+  transform: translateY(24px);
+  transition: opacity 0.8s ease, transform 0.8s ease;
+}
+.reveal.is-visible {
+  opacity: 1;
+  transform: none;
+}
+@media (prefers-reduced-motion: reduce) {
+  .reveal {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+  html {
+    scroll-behavior: auto;
+  }
+}
+
+/* Carrousel témoignages */
+.testimonial-track {
+  transition: transform 0.6s ease;
+}

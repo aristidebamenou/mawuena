@@ -1,0 +1,24 @@
+---
+import Logo from './Logo.astro';
+---
+
+<footer class="bg-olive text-wall">
+  <div class="mx-auto flex max-w-6xl flex-col items-center gap-8 px-5 py-14 text-center md:flex-row md:justify-between md:px-8 md:text-left">
+    <div class="flex items-center gap-3">
+      <Logo width={26} height={40} />
+      <div class="leading-tight">
+        <p class="font-brand text-sm tracking-[0.2em]">MAISON MAWUENA</p>
+        <p class="text-[10px] uppercase tracking-[0.3em] opacity-70">massage &amp; bien-être</p>
+      </div>
+    </div>
+
+    <ul class="flex flex-wrap justify-center gap-6 text-[11px] uppercase tracking-[0.2em]">
+      <li><a href="#soins" class="hover:opacity-70">Les soins</a></li>
+      <li><a href="#maison" class="hover:opacity-70">La maison</a></li>
+      <li><a href="#contact" class="hover:opacity-70">Contact</a></li>
+      <li><a href="#" class="hover:opacity-70">Mentions légales</a></li>
+    </ul>
+
+    <p class="text-[11px] uppercase tracking-[0.2em] opacity-60">© 2026 Maison Mawuena</p>
+  </div>
+</footer>

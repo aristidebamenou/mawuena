@@ -1,0 +1,59 @@
+---
+import { ETAPES } from '../data/etapes.js';
+---
+
+<section id="deroule" class="bg-wall">
+  <div class="mx-auto grid max-w-6xl gap-12 px-5 py-20 md:grid-cols-2 md:px-8 md:py-28">
+    <div>
+      <p class="reveal text-[11px] uppercase tracking-[0.35em] text-skin">Votre séance</p>
+      <h2 class="reveal font-brand mt-4 text-2xl text-olive md:text-4xl">Comment se déroule<br />une séance&nbsp;?</h2>
+      <p class="reveal mt-6 max-w-md text-sm leading-loose text-wood">
+        Trois temps pensés pour que rien ne presse : on arrive, on se dépose, on repart plus léger.
+      </p>
+      <a
+        href="#contact"
+        class="reveal mt-8 inline-block border border-olive px-8 py-4 text-xs uppercase tracking-[0.25em] transition-colors hover:bg-olive hover:text-wall"
+      >
+        Réserver une séance
+      </a>
+    </div>
+
+    <!-- Accordéon : le premier temps est ouvert par défaut -->
+    <div class="reveal divide-y divide-linen border-y border-linen" id="accordion">
+      {ETAPES.map((etape, i) => (
+        <div class="accordion-item">
+          <h3>
+            <button
+              class="accordion-trigger flex w-full items-center justify-between gap-4 py-6 text-left"
+              aria-expanded={i === 0 ? 'true' : 'false'}
+            >
+              <span class="flex items-baseline gap-4">
+                <span class="font-display italic text-skin">{etape.numero}</span>
+                <span class="text-sm uppercase tracking-[0.2em]">{etape.titre}</span>
+              </span>
+              <span class="accordion-icon text-xl leading-none text-skin" aria-hidden="true">{i === 0 ? '−' : '+'}</span>
+            </button>
+          </h3>
+          <div class:list={['accordion-panel pb-6 text-sm leading-loose text-wood', i !== 0 && 'hidden']}>
+            {etape.contenu}
+          </div>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>
+
+<script>
+  /* Accordéon « déroulé d'une séance » */
+  document.querySelectorAll('.accordion-trigger').forEach((btn) => {
+    btn.addEventListener('click', () => {
+      const item = btn.closest('.accordion-item');
+      const panel = item.querySelector('.accordion-panel');
+      const icon = item.querySelector('.accordion-icon');
+      const expanded = btn.getAttribute('aria-expanded') === 'true';
+      btn.setAttribute('aria-expanded', String(!expanded));
+      panel.classList.toggle('hidden', expanded);
+      icon.textContent = expanded ? '+' : '−';
+    });
+  });
+</script>

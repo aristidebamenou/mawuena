@@ -1,0 +1,112 @@
+---
+import { Image } from 'astro:assets';
+import contactBg from '../assets/images/contact.jpg';
+import { CONTACT } from '../data/site.js';
+---
+
+<section id="contact" class="relative overflow-hidden bg-wood text-wall">
+  <Image
+    src={contactBg}
+    alt=""
+    aria-hidden="true"
+    class="absolute inset-0 h-full w-full object-cover opacity-30"
+    widths={[768, 1280, 1920]}
+    sizes="100vw"
+    loading="lazy"
+  />
+  <div class="absolute inset-0 bg-wood/70" aria-hidden="true"></div>
+
+  <div class="relative z-10 mx-auto grid max-w-6xl gap-12 px-5 py-20 md:grid-cols-2 md:px-8 md:py-28">
+    <div>
+      <p class="reveal text-[11px] uppercase tracking-[0.35em] text-linen">Contact</p>
+      <h2 class="reveal font-brand mt-4 text-2xl md:text-4xl">
+        À quand remonte votre dernier
+        <span class="font-display italic tracking-normal text-linen">voyage sensoriel&nbsp;?</span>
+      </h2>
+      <p class="reveal mt-6 max-w-md text-sm leading-loose text-wall/85">
+        Réservez votre séance ou écrivez-nous : nous prendrons le temps de choisir ensemble le soin qui vous convient.
+      </p>
+
+      <dl class="reveal mt-10 space-y-4 text-sm">
+        <div class="flex gap-4">
+          <dt class="w-24 shrink-0 text-[11px] uppercase tracking-[0.25em] text-linen">Adresse</dt>
+          <dd>{CONTACT.adresse} {CONTACT.adresseAConfirmer && <span class="opacity-60">(à confirmer)</span>}</dd>
+        </div>
+        <div class="flex gap-4">
+          <dt class="w-24 shrink-0 text-[11px] uppercase tracking-[0.25em] text-linen">Téléphone</dt>
+          <dd><a href={CONTACT.telephoneHref} class="underline underline-offset-4 hover:opacity-80">{CONTACT.telephone}</a></dd>
+        </div>
+        <div class="flex gap-4">
+          <dt class="w-24 shrink-0 text-[11px] uppercase tracking-[0.25em] text-linen">E-mail</dt>
+          <dd><a href={`mailto:${CONTACT.email}`} class="underline underline-offset-4 hover:opacity-80">{CONTACT.email}</a></dd>
+        </div>
+        <div class="flex gap-4">
+          <dt class="w-24 shrink-0 text-[11px] uppercase tracking-[0.25em] text-linen">Horaires</dt>
+          <dd>{CONTACT.horaires} {CONTACT.horairesAConfirmer && <span class="opacity-60">(à confirmer)</span>}</dd>
+        </div>
+      </dl>
+    </div>
+
+    <!-- Formulaire de contact (front uniquement : aucun envoi réel, cf. Points de vigilance) -->
+    <form id="contact-form" class="reveal space-y-5" novalidate>
+      <div>
+        <label for="name" class="mb-2 block text-[11px] uppercase tracking-[0.25em] text-linen">Votre nom</label>
+        <input
+          type="text"
+          id="name"
+          name="name"
+          required
+          autocomplete="name"
+          class="w-full border border-linen/50 bg-transparent px-4 py-3 text-sm placeholder-wall/40 focus:border-wall focus:outline-none"
+          placeholder="Prénom Nom"
+        />
+      </div>
+      <div>
+        <label for="email" class="mb-2 block text-[11px] uppercase tracking-[0.25em] text-linen">Votre e-mail</label>
+        <input
+          type="email"
+          id="email"
+          name="email"
+          required
+          autocomplete="email"
+          class="w-full border border-linen/50 bg-transparent px-4 py-3 text-sm placeholder-wall/40 focus:border-wall focus:outline-none"
+          placeholder="vous@exemple.fr"
+        />
+      </div>
+      <div>
+        <label for="message" class="mb-2 block text-[11px] uppercase tracking-[0.25em] text-linen">Votre message</label>
+        <textarea
+          id="message"
+          name="message"
+          rows="4"
+          required
+          class="w-full border border-linen/50 bg-transparent px-4 py-3 text-sm placeholder-wall/40 focus:border-wall focus:outline-none"
+          placeholder="Le soin qui vous intéresse, vos disponibilités…"></textarea>
+      </div>
+      <button
+        type="submit"
+        class="w-full bg-wall px-8 py-4 text-xs uppercase tracking-[0.25em] text-olive transition-opacity hover:opacity-85"
+      >
+        Envoyer
+      </button>
+      <p id="form-feedback" class="hidden text-sm text-linen" role="status"></p>
+    </form>
+  </div>
+</section>
+
+<script>
+  /* Formulaire contact : SIMULATION front uniquement —
+     aucun envoi réel : à brancher sur un backend ou un service tiers (Formspree, …). */
+  const form = document.getElementById('contact-form');
+  const feedback = document.getElementById('form-feedback');
+  form.addEventListener('submit', (e) => {
+    e.preventDefault();
+    if (!form.checkValidity()) {
+      form.reportValidity();
+      return;
+    }
+    feedback.textContent = 'Merci ! Votre message a bien été pris en compte (démonstration — aucun envoi réel).';
+    feedback.classList.remove('hidden');
+    form.reset();
+  });
+</script>

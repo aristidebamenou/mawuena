@@ -1,0 +1,36 @@
+---
+import { Image } from 'astro:assets';
+import maison from '../assets/images/maison.jpg';
+---
+
+<section id="maison" class="bg-linen/40">
+  <div class="mx-auto grid max-w-6xl items-center gap-12 px-5 py-20 md:grid-cols-2 md:px-8 md:py-28">
+    <figure class="reveal order-2 md:order-1">
+      <Image
+        src={maison}
+        alt="Portrait de la praticienne de Maison Mawuena, concentrée, penchée au-dessus d'une personne recouverte d'un drap vert"
+        class="aspect-[3/4] w-full object-cover"
+        widths={[480, 960]}
+        sizes="(min-width: 768px) 50vw, 100vw"
+        loading="lazy"
+      />
+    </figure>
+    <div class="order-1 md:order-2">
+      <p class="reveal text-[11px] uppercase tracking-[0.35em] text-skin">La maison</p>
+      <h2 class="reveal font-brand mt-4 text-2xl text-olive md:text-4xl">Une maison,<br />un héritage</h2>
+      <p class="reveal mt-6 text-sm leading-loose text-wood md:text-base">
+        Plus proche d'un chalet de montagne que d'un institut traditionnel, Maison Mawuena
+        est née d'une conviction simple : votre corps mérite une attention particulière,
+        et votre esprit aussi.
+      </p>
+      <p class="reveal mt-4 text-sm leading-loose text-wood md:text-base">
+        Chaque geste puise dans un savoir-faire transmis, chaque matière est choisie pour
+        son toucher — lin, coton tissé, bois — et chaque séance est portée par la même
+        intention : vous ramener à vous.
+      </p>
+      <p class="reveal font-display mt-8 text-lg italic text-olive">
+        « Faites de votre corps une priorité. »
+      </p>
+    </div>
+  </div>
+</section>
